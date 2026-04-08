@@ -1,0 +1,333 @@
+{
+  "products": [
+    {
+      "name": "code-engine-cloud-logs",
+      "label": "IBM Code Engine with IBM Cloud Logs",
+      "product_kind": "solution",
+      "tags": [
+        "ibm_created",
+        "target_terraform",
+        "terraform",
+        "solution",
+        "code_engine",
+        "cloud_logs",
+        "logging",
+        "observability"
+      ],
+      "keywords": [
+        "code engine",
+        "cloud logs",
+        "logging",
+        "observability",
+        "serverless",
+        "containers",
+        "IaC",
+        "terraform"
+      ],
+      "short_description": "Deploy IBM Code Engine with integrated IBM Cloud Logs for centralized logging and monitoring",
+      "long_description": "This deployable architecture provisions a complete infrastructure for IBM Code Engine with integrated IBM Cloud Logs. It automatically creates a Code Engine project, Cloud Logs instance with Cloud Object Storage for data persistence, and configures platform logs routing to send all Code Engine logs to Cloud Logs. Optional Context-Based Restrictions (CBR) provide enhanced security controls.",
+      "offering_docs_url": "https://cloud.ibm.com/docs/codeengine",
+      "offering_icon_url": "https://globalcatalog.cloud.ibm.com/api/v1/1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc/artifacts/solution.svg",
+      "provider_name": "IBM",
+      "features": [
+        {
+          "title": "Automated Log Integration",
+          "description": "Automatic platform logs routing from Code Engine to Cloud Logs with no additional configuration required"
+        },
+        {
+          "title": "Scalable Storage",
+          "description": "Cloud Object Storage buckets for logs and metrics data with configurable retention periods"
+        },
+        {
+          "title": "Security Controls",
+          "description": "Optional Context-Based Restrictions (CBR) for enhanced access control and security"
+        },
+        {
+          "title": "Multi-Region Support",
+          "description": "Deploy in any supported IBM Cloud region with consistent configuration"
+        }
+      ],
+      "flavors": [
+        {
+          "label": "Standard",
+          "name": "standard",
+          "working_directory": ".",
+          "architecture": {
+            "descriptions": "This architecture deploys IBM Code Engine with IBM Cloud Logs integration, including Cloud Object Storage for log persistence and optional Context-Based Restrictions for security.",
+            "features": [
+              {
+                "title": "Code Engine Project",
+                "description": "Serverless container platform for deploying applications and jobs"
+              },
+              {
+                "title": "Cloud Logs Instance",
+                "description": "Centralized logging service with configurable retention"
+              },
+              {
+                "title": "Cloud Object Storage",
+                "description": "Persistent storage for logs and metrics data"
+              },
+              {
+                "title": "Platform Logs Routing",
+                "description": "Automatic log routing from Code Engine to Cloud Logs"
+              }
+            ],
+            "diagrams": [
+              {
+                "diagram": {
+                  "caption": "IBM Code Engine with Cloud Logs Architecture",
+                  "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-code-engine/main/reference-architecture/code-engine-cloud-logs.svg",
+                  "type": "image/svg+xml"
+                },
+                "description": "Architecture diagram showing Code Engine project connected to Cloud Logs instance with Cloud Object Storage for data persistence"
+              }
+            ]
+          },
+          "configuration": [
+            {
+              "key": "ibmcloud_api_key",
+              "type": "password",
+              "description": "The IBM Cloud API key required to deploy resources",
+              "required": true,
+              "hidden": false
+            },
+            {
+              "key": "region",
+              "type": "string",
+              "default_value": "us-south",
+              "description": "The IBM Cloud region where all resources will be deployed",
+              "required": false,
+              "options": [
+                {
+                  "displayname": "US South (Dallas)",
+                  "value": "us-south"
+                },
+                {
+                  "displayname": "US East (Washington DC)",
+                  "value": "us-east"
+                },
+                {
+                  "displayname": "EU GB (London)",
+                  "value": "eu-gb"
+                },
+                {
+                  "displayname": "EU DE (Frankfurt)",
+                  "value": "eu-de"
+                },
+                {
+                  "displayname": "JP TOK (Tokyo)",
+                  "value": "jp-tok"
+                },
+                {
+                  "displayname": "AU SYD (Sydney)",
+                  "value": "au-syd"
+                },
+                {
+                  "displayname": "CA TOR (Toronto)",
+                  "value": "ca-tor"
+                },
+                {
+                  "displayname": "BR SAO (São Paulo)",
+                  "value": "br-sao"
+                },
+                {
+                  "displayname": "EU ES (Madrid)",
+                  "value": "eu-es"
+                },
+                {
+                  "displayname": "JP OSA (Osaka)",
+                  "value": "jp-osa"
+                }
+              ]
+            },
+            {
+              "key": "prefix",
+              "type": "string",
+              "default_value": "ce-logs",
+              "description": "A prefix to add to all resource names to ensure uniqueness",
+              "required": false
+            },
+            {
+              "key": "resource_group",
+              "type": "string",
+              "description": "The name of an existing resource group to deploy resources into. If not provided, a new resource group will be created",
+              "required": false
+            },
+            {
+              "key": "resource_tags",
+              "type": "array",
+              "default_value": [],
+              "description": "Optional list of tags to be added to all created resources for organization and cost tracking",
+              "required": false
+            },
+            {
+              "key": "access_tags",
+              "type": "array",
+              "default_value": [],
+              "description": "Optional list of access management tags to control access to resources",
+              "required": false
+            },
+            {
+              "key": "cloud_logs_plan",
+              "type": "string",
+              "default_value": "standard",
+              "description": "The pricing plan for the IBM Cloud Logs instance",
+              "required": false,
+              "options": [
+                {
+                  "displayname": "Standard",
+                  "value": "standard"
+                }
+              ]
+            },
+            {
+              "key": "retention_period",
+              "type": "number",
+              "default_value": 7,
+              "description": "The number of days IBM Cloud Logs will retain the logs data",
+              "required": false,
+              "options": [
+                {
+                  "displayname": "7 days",
+                  "value": 7
+                },
+                {
+                  "displayname": "14 days",
+                  "value": 14
+                },
+                {
+                  "displayname": "30 days",
+                  "value": 30
+                },
+                {
+                  "displayname": "60 days",
+                  "value": 60
+                },
+                {
+                  "displayname": "90 days",
+                  "value": 90
+                }
+              ]
+            },
+            {
+              "key": "service_endpoints",
+              "type": "string",
+              "default_value": "public-and-private",
+              "description": "The type of service endpoint for the IBM Cloud Logs instance",
+              "required": false,
+              "options": [
+                {
+                  "displayname": "Public and Private",
+                  "value": "public-and-private"
+                }
+              ]
+            },
+            {
+              "key": "enable_platform_logs",
+              "type": "boolean",
+              "default_value": true,
+              "description": "Enable platform logs routing to send Code Engine logs to Cloud Logs",
+              "required": false
+            },
+            {
+              "key": "enable_cbr_rules",
+              "type": "boolean",
+              "default_value": false,
+              "description": "Enable Context-Based Restrictions (CBR) rules to restrict access",
+              "required": false
+            },
+            {
+              "key": "cbr_enforcement_mode",
+              "type": "string",
+              "default_value": "report",
+              "description": "The enforcement mode for CBR rules",
+              "required": false,
+              "options": [
+                {
+                  "displayname": "Enabled (Enforce)",
+                  "value": "enabled"
+                },
+                {
+                  "displayname": "Report Only",
+                  "value": "report"
+                },
+                {
+                  "displayname": "Disabled",
+                  "value": "disabled"
+                }
+              ]
+            },
+            {
+              "key": "cbr_allowed_ip_range",
+              "type": "string",
+              "default_value": "0.0.0.0-255.255.255.255",
+              "description": "The IP range allowed to access resources when CBR is enabled (format: startIP-endIP)",
+              "required": false
+            }
+          ],
+          "outputs": [
+            {
+              "key": "code_engine_project_id",
+              "description": "The ID of the Code Engine project"
+            },
+            {
+              "key": "code_engine_project_name",
+              "description": "The name of the Code Engine project"
+            },
+            {
+              "key": "cloud_logs_crn",
+              "description": "The CRN of the IBM Cloud Logs instance"
+            },
+            {
+              "key": "cloud_logs_guid",
+              "description": "The GUID of the IBM Cloud Logs instance"
+            },
+            {
+              "key": "cloud_logs_ingress_endpoint",
+              "description": "The public ingress endpoint of the IBM Cloud Logs instance"
+            },
+            {
+              "key": "cos_instance_id",
+              "description": "The ID of the Cloud Object Storage instance"
+            },
+            {
+              "key": "logs_bucket_name",
+              "description": "The name of the COS bucket storing logs data"
+            },
+            {
+              "key": "metrics_bucket_name",
+              "description": "The name of the COS bucket storing metrics data"
+            }
+          ],
+          "iam_permissions": [
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "codeengine"
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "logs"
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "cloud-object-storage"
+            },
+            {
+              "role_crns": [
+                "crn:v1:bluemix:public:iam::::role:Editor"
+              ],
+              "service_name": "logs-router"
+            }
+          ],
+          "install_type": "fullstack"
+        }
+      ]
+    }
+  ]
+}
