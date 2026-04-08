@@ -39,8 +39,9 @@ terraform.rc
 *.swo
 *~
 
-# Ignore tar.gz files
+# Ignore tar.gz files (except code-engine-cloud-logs.tar.gz)
 *.tar.gz
+!code-engine-cloud-logs.tar.gz
 
 # Ignore Bob configuration
 .bob/
